@@ -102,7 +102,22 @@ public:
 			strat.push_back(State(act, comply, dissent));
 		}
 
+		file.close();
+
 		return true;
+	}
+
+	Action get_action(const int state) const {
+		return strat[state].action;
+	}
+
+	int get_next_state(const int curr_state, const Action opp_action) const {
+		return (opp_action == COMPLY) ? strat[curr_state].if_comply :
+										strat[curr_state].if_dissent;
+	}
+
+	const std::string& get_name() const {
+		return strat_name;
 	}
 
 private:

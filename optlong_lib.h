@@ -22,10 +22,12 @@ public:
 		strat1 = "random";
 		strat2 = "random";
 		verbose = false;
+		num_rounds = 10;
 	}
 
 	std::string strat1;
 	std::string strat2;
+	int num_rounds;
 	bool verbose;
 };
 

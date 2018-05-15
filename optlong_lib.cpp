@@ -11,6 +11,7 @@
 
 #include <getopt.h>
 #include <iostream>
+#include <string>
 
 #include "optlong_lib.h"
 #include "helpers.h"
@@ -25,13 +26,16 @@ void get_options(int argc, char *argv[], OptWrap &options) {
 
     opterr = false; // DO NOT CHANGE!!!
 
+	bool rounds = false;
+
     struct option long_opts[] = { {"help", no_argument, nullptr, 'h'},
                                   {"verbose", no_argument, nullptr, 'v'},
 								  {"strat1", required_argument, nullptr, '1'},
 							      {"strat2", required_argument, nullptr, '2'},
+								  {"rounds", required_argument, nullptr, 'r'},
                                   {nullptr, 0, nullptr, '\0'} };
 
-    while ((option = getopt_long(argc, argv, "v1:2:h",
+    while ((option = getopt_long(argc, argv, "vr:1:2:h",
 								 long_opts, &option_index)) != -1) {
         switch (option) {
 		case '1':
@@ -39,6 +43,10 @@ void get_options(int argc, char *argv[], OptWrap &options) {
 			break;
 		case '2':
 			options.strat2 = optarg;
+			break;
+		case 'r':
+			options.num_rounds = stoi(optarg);
+			rounds = true;
 			break;
 		case 'v':
 			options.verbose = true;
@@ -48,11 +56,15 @@ void get_options(int argc, char *argv[], OptWrap &options) {
             exit(0);
 			break;
 		default:
-			std::cout << "Invalid flag: " << option << endl;
+			cout << "Invalid flag: " << option << endl;
 			exit(0);
 			break;
 		}
     }
+
+	if (!rounds) {
+		cout << "Number of rounds not specified, set to 10 by default." << endl;
+	}
 
     return;
 }
