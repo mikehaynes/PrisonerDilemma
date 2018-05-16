@@ -57,7 +57,7 @@ void get_options(int argc, char *argv[], OptWrap &options) {
 			break;
 		default:
 			cout << "Invalid flag: " << option << endl;
-			exit(0);
+			exit(1);
 			break;
 		}
     }

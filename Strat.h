@@ -74,11 +74,11 @@ public:
 			switch (action) {
 			case 'c':
 			case 'C':
-				act = COMPLY;
+				act = COOPERATE;
 				break;
 			case 'd':
 			case 'D':
-				act = DISSENT;
+				act = DEFECT;
 				break;
 			default:
 				std::cout << "The file " << filename << " is improperly formatted.\n"
@@ -112,8 +112,8 @@ public:
 	}
 
 	int get_next_state(const int curr_state, const Action opp_action) const {
-		return (opp_action == COMPLY) ? strat[curr_state].if_comply :
-										strat[curr_state].if_dissent;
+		return (opp_action == COOPERATE) ? strat[curr_state].if_comply :
+										   strat[curr_state].if_dissent;
 	}
 
 	const std::string& get_name() const {

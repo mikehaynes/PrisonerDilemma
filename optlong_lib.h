@@ -16,11 +16,12 @@
 
 #include <string>
 
+const std::string RANDOM = "random";
 class OptWrap {
 public:
 	OptWrap() {
-		strat1 = "random";
-		strat2 = "random";
+		strat1 = RANDOM;
+		strat2 = RANDOM;
 		verbose = false;
 		num_rounds = 10;
 	}

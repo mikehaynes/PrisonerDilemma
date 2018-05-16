@@ -11,6 +11,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 #include "optlong_lib.h"
 #include "Strat.h"
@@ -22,16 +24,25 @@ bool init_strat(Strat &strat, const string &filename);
 
 int main(int argc, char *argv[]) {
 	ios_base::sync_with_stdio(false);
+	srand((int)time(NULL));
 
 	OptWrap options;
 	get_options(argc, argv, options);
 	if (options.num_rounds <= 0) {
-		cout << "Number of rounds must be greater than 8.  Aborting..." << endl;
+		cout << "Number of rounds must be greater than 0.  Aborting..." << endl;
 		return 3;
 	}
 
 	Strat strat1;
 	Strat strat2;
+
+	if (options.strat1 == RANDOM) {
+		options.strat1 = get_random_strategy();
+	}
+
+	if (options.strat2 == RANDOM) {
+		options.strat2 = get_random_strategy();
+	}
 
 	if (init_strat(strat1, options.strat1)) {
 		cout << "Success!" << endl;
@@ -46,6 +57,8 @@ int main(int argc, char *argv[]) {
 	else {
 		return 2;
 	}
+
+	simulate_turns(strat1, strat2, options.num_rounds, options.verbose);
 
 	return 0;
 }

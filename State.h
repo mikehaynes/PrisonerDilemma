@@ -10,12 +10,12 @@
 #ifndef STATE_H
 #define STATE_H
 
-enum Action { COMPLY, DISSENT };
+enum Action { COOPERATE, DEFECT };
 
 class State {
 public:
 	State() {
-		action = DISSENT;
+		action = DEFECT;
 		if_comply = 0;
 		if_dissent = 0;
 	}
